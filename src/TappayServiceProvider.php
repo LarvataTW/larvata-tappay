@@ -2,6 +2,7 @@
 
 namespace Larvata\Tappay;
 
+use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
 
 class TappayServiceProvider extends ServiceProvider
@@ -22,6 +23,8 @@ class TappayServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
+        AboutCommand::add('Larvata-Tappay', fn () => ['Version' => '0.1.0']);
     }
 
     /**
