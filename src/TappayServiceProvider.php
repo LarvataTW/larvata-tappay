@@ -24,7 +24,7 @@ class TappayServiceProvider extends ServiceProvider
             $this->bootForConsole();
         }
 
-        AboutCommand::add('Larvata-Tappay', fn () => ['Version' => '0.1.0']);
+        AboutCommand::add('Larvata-Tappay', fn () => ['Version' => '0.1.1']);
     }
 
     /**
