@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Larvata\Tappay\Payments\Tappay;
+namespace App\Services\Larvata\Tappay\Payments;
 
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\CalledResult;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\DeclareProperties;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\MonthSubscribe;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\ProductName;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\SendMessages;
+use App\Services\Larvata\Tappay\Payments\Tappay\CalledResult;
+use App\Services\Larvata\Tappay\Payments\Tappay\DeclareProperties;
+use App\Services\Larvata\Tappay\Payments\Tappay\MonthSubscribe;
+use App\Services\Larvata\Tappay\Payments\Tappay\ProductName;
+use App\Services\Larvata\Tappay\Payments\Tappay\SendMessages;
 use Illuminate\Support\Facades\DB;
 
 /**

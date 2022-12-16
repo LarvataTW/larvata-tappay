@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Services\Larvata\Tappay\Payments\Tappay;
+namespace App\Services\Larvata\Tappay\Payments;
 
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\CalledResult;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\DeclareProperties;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\IsTradeSuccessful;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\SendMessages;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\SendRequest;
+use App\Services\Larvata\Tappay\Payments\Traits\CalledResult;
+use App\Services\Larvata\Tappay\Payments\Traits\DeclareProperties;
+use App\Services\Larvata\Tappay\Payments\Traits\IsTradeSuccessful;
+use App\Services\Larvata\Tappay\Payments\Traits\SendMessages;
+use App\Services\Larvata\Tappay\Payments\Traits\SendRequest;
 use Illuminate\Support\Facades\DB;
 
 /**
- * 付款作業
+ * 定期扣款作業
  */
 class PayByCardTokenService
 {

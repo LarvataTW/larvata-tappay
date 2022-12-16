@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Larvata\Tappay\Payments\Tappay\Traits;
+namespace App\Services\Larvata\Tappay\Payments\Traits;
 
 use Illuminate\Support\Facades\Http;
 

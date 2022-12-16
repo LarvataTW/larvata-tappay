@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Larvata\Tappay\Payments\Tappay;
+namespace App\Services\Larvata\Tappay\Payments;
 
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\CalledResult;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\DeclareProperties;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\IsTradeSuccessful;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\SendRequest;
+use App\Services\Larvata\Tappay\Payments\Tappay\CalledResult;
+use App\Services\Larvata\Tappay\Payments\Tappay\DeclareProperties;
+use App\Services\Larvata\Tappay\Payments\Tappay\IsTradeSuccessful;
+use App\Services\Larvata\Tappay\Payments\Tappay\SendRequest;
 use Illuminate\Support\Facades\DB;
 
 /**

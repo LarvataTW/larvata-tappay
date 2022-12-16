@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Larvata\Tappay\Payments\Tappay;
+namespace App\Services\Larvata\Tappay\Payments;
 
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\CalledResult;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\DeclareProperties;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\IsTradeSuccessful;
-use App\Services\Larvata\Tappay\Payments\Tappay\Traits\SendRequest;
+use App\Services\Larvata\Tappay\Payments\Traits\CalledResult;
+use App\Services\Larvata\Tappay\Payments\Traits\DeclareProperties;
+use App\Services\Larvata\Tappay\Payments\Traits\IsTradeSuccessful;
+use App\Services\Larvata\Tappay\Payments\Traits\SendRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -42,6 +42,9 @@ class PayByPrimeService
 
         $this->frontend_redirect_url = config('larvata.tappay.frontend_redirect_url');
         $this->backend_payment_notify_url = config('larvata.tappay.backend_payment_notify_url');
+
+        $this->payment_success_callback_class_name = config('larvata.tappay.payment_success_callback_class_name');
+        $this->payment_failure_callback_class_name = config('larvata.tappay.payment_failure_callback_class_name');
     }
 
     public function call()
@@ -100,8 +103,22 @@ class PayByPrimeService
     {
         if($this->is_trade_successful()) {
             $this->actions_exception = DB::transaction(function () {
-                $this->update_or_create_member_credit_card();
+                if($this->three_domain_secure) {
+                    $this->order->update([
+                                             'rec_trade_id' => $this->response_body_json['rec_trade_id'],
+                                         ]);
+
+                    $this->data = [
+                        'action' => 'tappay',
+                        'payment_url' => $this->response_body_json['payment_url']
+                    ];
+                } else {
+                    $this->update_or_create_member_credit_card();
+                    (new $this->payment_success_callback_class_name($this->order))->call();
+                }
             });
+        } else {
+            (new $this->payment_failure_callback_class_name($this->order))->call();
         }
     }
 
