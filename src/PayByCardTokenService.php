@@ -9,7 +9,7 @@ use Larvata\Tappay\Traits\SendRequest;
 use Illuminate\Support\Facades\DB;
 
 /**
- * 定期扣款作業
+ * 使用儲存的信用卡 key 和 token 來進行扣款作業
  */
 class PayByCardTokenService
 {

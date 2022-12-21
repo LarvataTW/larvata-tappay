@@ -17,14 +17,14 @@ class PayByPrimeService
     use DeclareProperties, SendRequest, IsTradeSuccessful, CalledResult;
 
     /**
-     * @param int $order_id 訂單編號
      * @param string $prime Tappay 信用卡 prime
+     * @param int $order_id 訂單編號
      * @param string $details 交易品項內容，varchar(100)
      * @param boolean $three_domain_secure 是否使用 3D 驗證方式付款，預設為 true
      * @param string $tappay_partner_key Tappay partner key Tappay 金鑰
      * @param string $tappay_partner_key Tappay merchant id Tappay 店家編號
      */
-    public function __construct($order_id, $prime, $details, $three_domain_secure = true, $tappay_partner_key = null, $tappay_merchant_id = null)
+    public function __construct($prime, $order_id, $details, $three_domain_secure = true, $tappay_partner_key = null, $tappay_merchant_id = null)
     {
         $this->host = config('larvata.tappay.host');
         $this->api = "/tpc/payment/pay-by-prime";
