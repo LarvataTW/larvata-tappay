@@ -32,11 +32,6 @@ class TappayServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/tappay.php', 'tappay');
-
-        // Register the service the package provides.
-        $this->app->singleton('tappay', function ($app) {
-            return new Tappay;
-        });
     }
 
     /**
@@ -46,7 +41,6 @@ class TappayServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['tappay'];
     }
 
     /**
