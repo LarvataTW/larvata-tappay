@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Larvata\Tappay\Payments;
+namespace Larvata\Tappay;
 
 use Larvata\Tappay\Traits\CalledResult;
 use Larvata\Tappay\Traits\DeclareProperties;

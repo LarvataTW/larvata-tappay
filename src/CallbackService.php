@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Services\Larvata\Tappay\Payments;
+namespace Larvata\Tappay;
 
-use App\Services\Larvata\Tappay\Payments\Tappay\CalledResult;
-use App\Services\Larvata\Tappay\Payments\Tappay\DeclareProperties;
-use App\Services\Larvata\Tappay\Payments\Tappay\MonthSubscribe;
-use App\Services\Larvata\Tappay\Payments\Tappay\ProductName;
-use App\Services\Larvata\Tappay\Payments\Tappay\SendMessages;
+use Larvata\Tappay\Traits\CalledResult;
+use Larvata\Tappay\Traits\DeclareProperties;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -16,7 +13,7 @@ use Illuminate\Support\Facades\DB;
  */
 class CallbackService
 {
-    use DeclareProperties, ProductName, MonthSubscribe, SendMessages, CalledResult;
+    use DeclareProperties, CalledResult;
 
     public function __construct($status, $rec_trade_id)
     {

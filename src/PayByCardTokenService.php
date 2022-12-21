@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Services\Larvata\Tappay\Payments;
+namespace Larvata\Tappay;
 
 use Larvata\Tappay\Traits\CalledResult;
 use Larvata\Tappay\Traits\DeclareProperties;
 use Larvata\Tappay\Traits\IsTradeSuccessful;
-use Larvata\Tappay\Traits\SendMessages;
 use Larvata\Tappay\Traits\SendRequest;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +13,7 @@ use Illuminate\Support\Facades\DB;
  */
 class PayByCardTokenService
 {
-    use DeclareProperties, SendRequest, IsTradeSuccessful, CalledResult, SendMessages;
+    use DeclareProperties, SendRequest, IsTradeSuccessful, CalledResult;
 
     /**
      * @param int $order_id 訂單編號
