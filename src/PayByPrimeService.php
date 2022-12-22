@@ -68,7 +68,7 @@ class PayByPrimeService
             'prime' => $this->prime,
             'partner_key' => $this->partner_key,
             'merchant_id' => $this->merchant_id,
-            'amount' => $this->order->fee,
+            'amount' => $this->order->fee ?? $this->order->amount ?? 0,
             'currency' => 'TWD',
             'order_number' => $this->order->order_number,
             'details' => $this->details,
