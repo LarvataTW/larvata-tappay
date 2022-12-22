@@ -23,23 +23,23 @@ class BindCardService
      */
     public function __construct($member_id, $prime, $tappay_partner_key = null, $tappay_merchant_id = null)
     {
-        $this->app_url = config('larvata.tappay.app_url');
+        $this->app_url = config('tappay.app_url');
 
-        $this->host = config('larvata.tappay.host');
+        $this->host = config('tappay.host');
         $this->api = "/tpc/card/bind";
 
-        $this->frontend_redirect_url = config('larvata.tappay.frontend_redirect_url');
-        $this->backend_bind_card_notify_url = config('larvata.tappay.backend_bind_card_notify_url');
+        $this->frontend_redirect_url = config('tappay.frontend_redirect_url');
+        $this->backend_bind_card_notify_url = config('tappay.backend_bind_card_notify_url');
 
-        $this->partner_key = $tappay_partner_key ?? config('larvata.tappay.partner_key');
-        $this->merchant_id = $tappay_merchant_id ?? config('larvata.tappay.merchant_id');
+        $this->partner_key = $tappay_partner_key ?? config('tappay.partner_key');
+        $this->merchant_id = $tappay_merchant_id ?? config('tappay.merchant_id');
 
         $this->prime = $prime;
 
-        $this->member_class_name = config('larvata.tappay.member_class_name');
+        $this->member_class_name = config('tappay.member_class_name');
         $this->member_id = $member_id;
 
-        $this->member_credit_card_class_name = config('larvata.tappay.member_credit_card_class_name');
+        $this->member_credit_card_class_name = config('tappay.member_credit_card_class_name');
     }
 
     public function call()

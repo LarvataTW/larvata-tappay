@@ -17,15 +17,15 @@ class GetMemberCardService
 
     public function __construct($member_id, $tappay_partner_key = null, $tappay_merchant_id = null)
     {
-        $this->app_url = config('larvata.tappay.app_url');
+        $this->app_url = config('tappay.app_url');
 
-        $this->host = config('larvata.tappay.host');
+        $this->host = config('tappay.host');
         $this->api = "/tpc/direct-pay/get-member-card";
 
-        $this->partner_key = $tappay_partner_key ?? config('larvata.tappay.partner_key');
-        $this->merchant_id = $tappay_merchant_id ?? config('larvata.tappay.merchant_id');
+        $this->partner_key = $tappay_partner_key ?? config('tappay.partner_key');
+        $this->merchant_id = $tappay_merchant_id ?? config('tappay.merchant_id');
 
-        $this->member_class_name = config('larvata.tappay.member_class_name');
+        $this->member_class_name = config('tappay.member_class_name');
         $this->member_id = $member_id;
     }
 

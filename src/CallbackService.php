@@ -20,9 +20,9 @@ class CallbackService
         $this->status = $status;
         $this->rec_trade_id = $rec_trade_id;
 
-        $this->order_class_name = config('larvata.tappay.order_class_name');
-        $this->payment_success_callback_class_name = config('larvata.tappay.payment_success_callback_class_name');
-        $this->payment_failure_callback_class_name = config('larvata.tappay.payment_failure_callback_class_name');
+        $this->order_class_name = config('tappay.order_class_name');
+        $this->payment_success_callback_class_name = config('tappay.payment_success_callback_class_name');
+        $this->payment_failure_callback_class_name = config('tappay.payment_failure_callback_class_name');
     }
 
     public function call()

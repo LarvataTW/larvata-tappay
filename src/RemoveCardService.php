@@ -22,14 +22,14 @@ class RemoveCardService
      */
     public function __construct($member_id, $member_credit_card_id, $tappay_partner_key = null)
     {
-        $this->host = config('larvata.tappay.host');
+        $this->host = config('tappay.host');
         $this->api = '/tpc/card/remove';
-        $this->partner_key = $tappay_partner_key ?? config('larvata.tappay.partner_key');
+        $this->partner_key = $tappay_partner_key ?? config('tappay.partner_key');
 
-        $this->member_class_name = config('larvata.tappay.member_class_name');
+        $this->member_class_name = config('tappay.member_class_name');
         $this->member_id = $member_id;
 
-        $this->member_credit_card_class_name = config('larvata.tappay.member_credit_card_class_name');
+        $this->member_credit_card_class_name = config('tappay.member_credit_card_class_name');
         $this->member_credit_card_id = $member_credit_card_id;
     }
 

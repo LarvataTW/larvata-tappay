@@ -24,23 +24,23 @@ class PayByCardTokenService
      */
     public function __construct($order_id, $details, $three_domain_secure = true, $tappay_partner_key = null, $tappay_merchant_id = null)
     {
-        $this->host = config('larvata.tappay.host');
+        $this->host = config('tappay.host');
         $this->api = "/tpc/payment/pay-by-token";
 
-        $this->partner_key = $tappay_partner_key ?? config('larvata.tappay.partner_key');
-        $this->merchant_id = $tappay_merchant_id ?? config('larvata.tappay.merchant_id');
+        $this->partner_key = $tappay_partner_key ?? config('tappay.partner_key');
+        $this->merchant_id = $tappay_merchant_id ?? config('tappay.merchant_id');
 
         $this->three_domain_secure = $three_domain_secure;
 
-        $this->order_class_name = config('larvata.tappay.order_class_name');
+        $this->order_class_name = config('tappay.order_class_name');
         $this->order_id = $order_id;
         $this->details = $details;
 
-        $this->frontend_redirect_url = config('larvata.tappay.frontend_redirect_url');
-        $this->backend_payment_notify_url = config('larvata.tappay.backend_payment_notify_url');
+        $this->frontend_redirect_url = config('tappay.frontend_redirect_url');
+        $this->backend_payment_notify_url = config('tappay.backend_payment_notify_url');
 
-        $this->payment_success_callback_class_name = config('larvata.tappay.payment_success_callback_class_name');
-        $this->payment_failure_callback_class_name = config('larvata.tappay.payment_failure_callback_class_name');
+        $this->payment_success_callback_class_name = config('tappay.payment_success_callback_class_name');
+        $this->payment_failure_callback_class_name = config('tappay.payment_failure_callback_class_name');
     }
 
     public function call()

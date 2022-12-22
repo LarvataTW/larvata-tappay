@@ -32,12 +32,12 @@ class RecordService
      */
     public function __construct($order_id, $tappay_partner_key = null)
     {
-        $this->host = config('larvata.tappay.host');
+        $this->host = config('tappay.host');
         $this->api = "/tpc/transaction/query";
 
-        $this->partner_key = $tappay_partner_key ?? config('larvata.tappay.partner_key');
+        $this->partner_key = $tappay_partner_key ?? config('tappay.partner_key');
 
-        $this->order_class_name = config('larvata.tappay.order_class_name');
+        $this->order_class_name = config('tappay.order_class_name');
         $this->order_id = $order_id;
     }
 

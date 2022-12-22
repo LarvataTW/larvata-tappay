@@ -24,7 +24,7 @@ class BindCardCallbackService
     public function __construct($rec_trade_id)
     {
         $this->rec_trade_id = $rec_trade_id;
-        $this->member_credit_card_class_name = config('larvata.tappay.member_credit_card_class_name');
+        $this->member_credit_card_class_name = config('tappay.member_credit_card_class_name');
     }
 
     public function call()
