@@ -39,8 +39,7 @@ class PayByCardTokenService
         $this->frontend_redirect_url = config('tappay.frontend_redirect_url');
         $this->backend_payment_notify_url = config('tappay.backend_payment_notify_url');
 
-        $this->payment_success_callback_class_name = config('tappay.payment_success_callback_class_name');
-        $this->payment_failure_callback_class_name = config('tappay.payment_failure_callback_class_name');
+        $this->payment_callback_class_name = config('tappay.payment_callback_class_name');
     }
 
     public function call()
@@ -96,11 +95,11 @@ class PayByCardTokenService
                         'payment_url' => $this->response_body_json['payment_url']
                     ];
                 } else {
-                    (new $this->payment_success_callback_class_name($this->order))->call();
+                    (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
                 }
             });
         } else {
-            (new $this->payment_failure_callback_class_name($this->order))->call();
+            (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
         }
     }
 }

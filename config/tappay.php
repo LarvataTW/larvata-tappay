@@ -12,6 +12,5 @@ return [
     'member_class_name' => env('MEMBER_CLASS_NAME', 'App\Models\Member'),
     'member_credit_card_class_name' => env('MEMBER_CREDIT_CARD_CLASS_NAME', 'App\Models\MemberCreditCard'),
     'order_class_name' => env('ORDER_CLASS_NAME', 'App\Models\Order'),
-    'payment_success_callback_class_name' => env('PAYMENT_SUCCESS_CALLBACK_CLASS_NAME', 'App\Services\Orders\Payments\SuccessCallback'),
-    'payment_failure_callback_class_name' => env('PAYMENT_FAILURE_CALLBACK_CLASS_NAME', 'App\Services\Orders\Payments\FailureCallback'),
+    'payment_callback_class_name' => env('PAYMENT_CALLBACK_CLASS_NAME', 'App\Services\Order\Payment\TappayCallback'),
 ];

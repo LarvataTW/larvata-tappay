@@ -43,8 +43,7 @@ class PayByPrimeService
         $this->frontend_redirect_url = config('tappay.frontend_redirect_url');
         $this->backend_payment_notify_url = config('tappay.backend_payment_notify_url');
 
-        $this->payment_success_callback_class_name = config('tappay.payment_success_callback_class_name');
-        $this->payment_failure_callback_class_name = config('tappay.payment_failure_callback_class_name');
+        $this->payment_callback_class_name = config('tappay.payment_callback_class_name');
     }
 
     public function call()
@@ -71,6 +70,7 @@ class PayByPrimeService
             'amount' => (float) ($this->order->fee ?? $this->order->amount ?? 0),
             'currency' => 'TWD',
             'order_number' => $this->order->order_number,
+            'bank_transaction_id' => str_replace('_', '', $this->order->order_number . now()->format('s')),
             'details' => $this->details,
             'cardholder' => [
                 'phone_number' => $this->member->mobile,
@@ -101,15 +101,20 @@ class PayByPrimeService
 
                     $this->data = [
                         'action' => 'tappay',
-                        'payment_url' => $this->response_body_json['payment_url']
+                        'payment_url' => $this->response_body_json['payment_url'],
+                        'rec_trade_id' => $this->response_body_json['rec_trade_id'],
+                        'bank_transaction_id' => $this->response_body_json['bank_transaction_id'],
+                        'card_info' => [
+                            'last_four' => $this->response_body_json['card_info']['last_four']
+                        ]
                     ];
                 } else {
                     $this->update_or_create_member_credit_card();
-                    (new $this->payment_success_callback_class_name($this->order))->call();
+                    (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
                 }
             });
         } else {
-            (new $this->payment_failure_callback_class_name($this->order))->call();
+            (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
         }
     }
 
