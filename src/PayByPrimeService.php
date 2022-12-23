@@ -68,13 +68,13 @@ class PayByPrimeService
             'prime' => $this->prime,
             'partner_key' => $this->partner_key,
             'merchant_id' => $this->merchant_id,
-            'amount' => $this->order->fee ?? $this->order->amount ?? 0,
+            'amount' => (float) ($this->order->fee ?? $this->order->amount ?? 0),
             'currency' => 'TWD',
             'order_number' => $this->order->order_number,
             'details' => $this->details,
             'cardholder' => [
                 'phone_number' => $this->member->mobile,
-                'name' => $this->member->name,
+                'name' => $this->member->name ?? "{$this->member->first_name} {$this->member->last_name}" ?? '',
                 'email' => $this->member->email,
                 'member_id' => $this->member->id
             ],
@@ -85,15 +85,6 @@ class PayByPrimeService
             ],
             'remember' => true,
         ];
-    }
-
-    private function send_request()
-    {
-        $this->response = Http::timeout(30)
-            ->withHeaders([
-                              'x-api-key' => $this->partner_key,
-                              'Content-Type' => 'application/json'
-                          ])->post($this->host.$this->api, $this->payload);
     }
 
     /**
