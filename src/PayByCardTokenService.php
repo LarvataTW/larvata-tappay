@@ -95,11 +95,9 @@ class PayByCardTokenService
                         'payment_url' => $this->response_body_json['payment_url']
                     ];
                 } else {
-                    (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
+                    (new $this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
                 }
             });
-        } else {
-            (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
         }
     }
 }

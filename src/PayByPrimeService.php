@@ -95,10 +95,6 @@ class PayByPrimeService
         if($this->is_trade_successful()) {
             $this->actions_exception = DB::transaction(function () {
                 if($this->three_domain_secure) {
-                    $this->order->update([
-                                             'rec_trade_id' => $this->response_body_json['rec_trade_id'],
-                                         ]);
-
                     $this->data = [
                         'action' => 'tappay',
                         'payment_url' => $this->response_body_json['payment_url'],
@@ -108,13 +104,24 @@ class PayByPrimeService
                             'last_four' => $this->response_body_json['card_info']['last_four']
                         ]
                     ];
+
+                    $this->order->update([
+                                             'rec_trade_id' => $this->response_body_json['rec_trade_id'],
+                                         ]);
                 } else {
+                    $this->data = [
+                        'action' => 'tappay',
+                        'rec_trade_id' => $this->response_body_json['rec_trade_id'],
+                        'bank_transaction_id' => $this->response_body_json['bank_transaction_id'],
+                        'card_info' => [
+                            'last_four' => $this->response_body_json['card_info']['last_four']
+                        ]
+                    ];
+
                     $this->update_or_create_member_credit_card();
                     (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
                 }
             });
-        } else {
-            (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
         }
     }
 

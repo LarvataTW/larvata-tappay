@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
  *  建立會員綁定卡片資料
  *  透過 BindCardService 取得 payment_url（3D 驗證頁面 URL），會員完成 3D 驗證作業後，Tappay 會呼叫 callback，
  *  由此回應的成功與否來決定是否新建/更新會員綁定卡片資料。
- * todo 需要有 controller 和 route 設定，來執行此 callback 作業
  */
 class BindCardCallbackService
 {
