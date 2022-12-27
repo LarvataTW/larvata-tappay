@@ -95,6 +95,7 @@ class PayByPrimeService
         if($this->is_trade_successful()) {
             $this->actions_exception = DB::transaction(function () {
                 if($this->three_domain_secure) {
+                    // 設定要回傳的 data 資料結構
                     $this->data = [
                         'action' => 'tappay',
                         'payment_url' => $this->response_body_json['payment_url'],
@@ -109,6 +110,7 @@ class PayByPrimeService
                                              'rec_trade_id' => $this->response_body_json['rec_trade_id'],
                                          ]);
                 } else {
+                    // 設定要回傳的 data 資料結構
                     $this->data = [
                         'action' => 'tappay',
                         'rec_trade_id' => $this->response_body_json['rec_trade_id'],
