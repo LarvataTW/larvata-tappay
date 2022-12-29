@@ -70,7 +70,7 @@ class PayByPrimeService
             'amount' => (float) ($this->order->fee ?? $this->order->amount ?? 0),
             'currency' => 'TWD',
             'order_number' => $this->order->order_number,
-            'bank_transaction_id' => str_replace('_', '', $this->order->order_number . now()->format('s')),
+            'bank_transaction_id' => str_replace('_', '', $this->order->order_number . str_pad(random_int(0, 1000), 4, '0', STR_PAD_LEFT)),
             'details' => $this->details,
             'cardholder' => [
                 'phone_number' => $this->member->mobile,
