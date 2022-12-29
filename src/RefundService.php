@@ -40,7 +40,7 @@ class RefundService
     {
         $this->payload = [
             'partner_key' => $this->partner_key,
-            'rec_trade_id' => $this->order->rec_trade_id ?? '',
+            'rec_trade_id' => $this->rec_trade_id ?? '',
             'amount' => $this->refund_amount ?? $this->order->amount ?? 0,
         ];
     }

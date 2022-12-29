@@ -98,6 +98,7 @@ class PayByPrimeService
                     // 設定要回傳的 data 資料結構
                     $this->data = [
                         'action' => 'tappay',
+                        'status' => $this->response_body_json['status'],
                         'payment_url' => $this->response_body_json['payment_url'],
                         'rec_trade_id' => $this->response_body_json['rec_trade_id'],
                         'bank_transaction_id' => $this->response_body_json['bank_transaction_id'],
@@ -113,6 +114,7 @@ class PayByPrimeService
                     // 設定要回傳的 data 資料結構
                     $this->data = [
                         'action' => 'tappay',
+                        'status' => $this->response_body_json['status'],
                         'rec_trade_id' => $this->response_body_json['rec_trade_id'],
                         'bank_transaction_id' => $this->response_body_json['bank_transaction_id'],
                         'card_info' => [
@@ -121,7 +123,6 @@ class PayByPrimeService
                     ];
 
                     $this->update_or_create_member_credit_card();
-                    (new $this->$this->payment_callback_class_name($this->response_body_json['rec_trade_id'], $this->response_body_json['status']))->call();
                 }
             });
         }
