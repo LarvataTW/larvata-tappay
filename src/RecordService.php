@@ -45,12 +45,13 @@ class RecordService
 
     public function call()
     {
-        $this->load_order();
         $this->make_payload();
         $this->send_request();
         $this->after_actions();
-        return $this->called_result();
-
+        return [
+            'success' => true,
+            'data' => $this->data
+        ];
     }
 
     private function make_payload()
@@ -71,13 +72,6 @@ class RecordService
      */
     private function after_actions()
     {
-        if($this->is_trade_successful()) {
-            $this->data = $this->response_body_json['trade_records'];
-        }
-    }
-
-    private function load_order()
-    {
-        $this->order = $this->order_class_name::find($this->order_id);
+        $this->data = $this->response_body_json['trade_records'];
     }
 }
