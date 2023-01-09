@@ -40,4 +40,7 @@ trait DeclareProperties
     private $order;
     private $details;
     private $refund_amount;
+
+    private string $order_number;
+    private string $bank_transsaction_id;
 }

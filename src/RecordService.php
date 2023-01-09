@@ -27,18 +27,20 @@ class RecordService
     ];
 
     /**
-     * @param int $order_id 訂單編號
+     * @param string $rec_trade_id 交易識別碼
+     * @param string $order_number 訂單編號
+     * @param string $bank_transsaction_id 銀行端的訂單編號
      * @param string $tappay_partner_key Tappay partner key Tappay 金鑰
      */
-    public function __construct($order_id, $tappay_partner_key = null)
+    public function __construct($rec_trade_id, $order_number, $bank_transsaction_id, $tappay_partner_key = null)
     {
         $this->host = config('tappay.host');
         $this->api = "/tpc/transaction/query";
 
+        $this->rec_trade_id = $rec_trade_id;
+        $this->order_number = $order_number;
+        $this->bank_transsaction_id = $bank_transsaction_id;
         $this->partner_key = $tappay_partner_key ?? config('tappay.partner_key');
-
-        $this->order_class_name = config('tappay.order_class_name');
-        $this->order_id = $order_id;
     }
 
     public function call()
@@ -56,7 +58,9 @@ class RecordService
         $this->payload = [
             'partner_key' => $this->partner_key,
             'filters' => [
-                'rec_trade_id' => $this->order->rec_trade_id ?? ''
+                'rec_trade_id' => $this->rec_trade_id ?? '',
+                'order_number' => $this->order_number ?? '',
+                'bank_transsaction_id' => $this->bank_transsaction_id ?? ''
             ]
         ];
     }
