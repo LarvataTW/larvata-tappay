@@ -42,5 +42,5 @@ trait DeclareProperties
     private $refund_amount;
 
     private string $order_number;
-    private string $bank_transsaction_id;
+    private string $bank_transaction_id;
 }
