@@ -19,12 +19,13 @@ class PayByPrimeService
     /**
      * @param string $prime Tappay 信用卡 prime
      * @param int $order_id 訂單編號
+     * @param int $payment_record_id 付款紀錄編號
      * @param string $details 交易品項內容，varchar(100)
      * @param boolean $three_domain_secure 是否使用 3D 驗證方式付款，預設為 true
      * @param string $tappay_partner_key Tappay partner key Tappay 金鑰
      * @param string $tappay_partner_key Tappay merchant id Tappay 店家編號
      */
-    public function __construct($prime, $order_id, $details, $three_domain_secure = true, $tappay_partner_key = null, $tappay_merchant_id = null)
+    public function __construct($prime, $order_id, $details, $payment_record_id, $three_domain_secure = true, $tappay_partner_key = null, $tappay_merchant_id = null)
     {
         $this->host = config('tappay.host');
         $this->api = "/tpc/payment/pay-by-prime";
@@ -39,6 +40,7 @@ class PayByPrimeService
         $this->order_class_name = config('tappay.order_class_name');
         $this->order_id = $order_id;
         $this->details = $details;
+        $this->payment_record_id = $payment_record_id;
 
         $this->frontend_redirect_url = config('tappay.frontend_redirect_url');
         $this->backend_payment_notify_url = config('tappay.backend_payment_notify_url');
@@ -70,7 +72,7 @@ class PayByPrimeService
             'amount' => (float) ($this->order->fee ?? $this->order->amount ?? 0),
             'currency' => 'TWD',
             'order_number' => $this->order->order_number,
-            'bank_transaction_id' => str_replace('_', '', $this->order->order_number . str_pad(random_int(0, 1000), 4, '0', STR_PAD_LEFT)),
+            'bank_transaction_id' => $this->payment_record_id,
             'details' => $this->details,
             'cardholder' => [
                 'phone_number' => $this->member->mobile,

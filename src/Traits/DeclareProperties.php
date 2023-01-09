@@ -36,6 +36,7 @@ trait DeclareProperties
 
     private $order_class_name;
     private $order_id;
+    private $payment_record_id;
     private $order;
     private $details;
     private $refund_amount;
