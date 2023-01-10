@@ -72,7 +72,7 @@ class PayByPrimeService
             'amount' => (float) ($this->order->fee ?? $this->order->amount ?? 0),
             'currency' => 'TWD',
             'order_number' => $this->order->order_number,
-            'bank_transaction_id' => $this->payment_record_id,
+            'bank_transaction_id' => $this->generate_bank_transaction_id(),
             'details' => $this->details,
             'cardholder' => [
                 'phone_number' => $this->member->mobile,
@@ -149,5 +149,11 @@ class PayByPrimeService
                     'expiry_date'  => $this->response_body_json['card_info']['expiry_date'],
                 ]);
         }
+    }
+
+    // 產生銀行端交易編號，限制長度 20 字
+    private function generate_bank_transaction_id()
+    {
+        return str_replace('_', '', $this->order->order_number) . now()->timestamp()->toString();
     }
 }
