@@ -104,6 +104,7 @@ class PayByPrimeService
                         'payment_url' => $this->response_body_json['payment_url'],
                         'rec_trade_id' => $this->response_body_json['rec_trade_id'],
                         'bank_transaction_id' => $this->response_body_json['bank_transaction_id'],
+                        'transaction_time_millis' => $this->response_body_json['transaction_time_millis'],
                         'card_info' => [
                             'last_four' => $this->response_body_json['card_info']['last_four']
                         ]
@@ -119,6 +120,7 @@ class PayByPrimeService
                         'status' => $this->response_body_json['status'],
                         'rec_trade_id' => $this->response_body_json['rec_trade_id'],
                         'bank_transaction_id' => $this->response_body_json['bank_transaction_id'],
+                        'transaction_time_millis' => $this->response_body_json['transaction_time_millis'],
                         'card_info' => [
                             'last_four' => $this->response_body_json['card_info']['last_four']
                         ]
