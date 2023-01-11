@@ -72,6 +72,6 @@ class RecordService
      */
     private function after_actions()
     {
-        $this->data = $this->response_body_json['trade_records'];
+        $this->data = $this->response_body_json['trade_records'] ?? $this->response_body_json['message'];
     }
 }

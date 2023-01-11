@@ -75,9 +75,9 @@ class PayByPrimeService
             'bank_transaction_id' => $this->generate_bank_transaction_id(),
             'details' => $this->details,
             'cardholder' => [
-                'phone_number' => $this->member->mobile,
-                'name' => $this->member->name ?? "{$this->member->first_name} {$this->member->last_name}" ?? '',
-                'email' => $this->member->email,
+                'phone_number' => $this->order->mobile,
+                'name' => "{$this->order->first_name} {$this->order->last_name}",
+                'email' => $this->order->email,
                 'member_id' => $this->member->id
             ],
             'three_domain_secure' => $this->three_domain_secure,
