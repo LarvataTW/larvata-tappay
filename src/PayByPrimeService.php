@@ -156,6 +156,9 @@ class PayByPrimeService
     // 產生銀行端交易編號，限制長度 20 字
     private function generate_bank_transaction_id()
     {
-        return str_replace('_', '', $this->order->order_number) . now()->timestamp;
+        $max_bank_transaction_id_length = 20;
+        $bank_transaction_id = str_replace('_', '', $this->order->order_number) . time();
+        $bank_transaction_id = substr($bank_transaction_id, 0, $max_bank_transaction_id_length);
+        return $bank_transaction_id;
     }
 }
