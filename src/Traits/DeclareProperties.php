@@ -31,6 +31,7 @@ trait DeclareProperties
     private $member;
 
     private $member_credit_card_class_name;
+    private $payment_callback_class_name;
     private $member_credit_card_id;
     private $member_credit_card;
 
